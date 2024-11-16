@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<h1>Facturación</h1>
+<br>
+<form method="POST" action="{{ url_for('facturacion') }}">
+    <label>Cliente:</label>
+    <select name="cliente" required>
+        {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Productos:</label>
+    <div id="productos-container">
+        {% for producto in inventario %}
+            <div class="producto-item">
+                <input type="checkbox" name="productos" value="{{ producto.id }}" class="producto" />
+                <label>{{ producto.nombre }} - ${{ producto.precio }} - {{ producto.cantidad }} en stock</label>
+                <input type="number" name="cantidad_{{ producto.id }}" min="0" max="{{ producto.cantidad }}" value="0" />
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit">Generar Factura</button>
+</form>
+
+
+
+<h2>Facturas Generadas:</h2>
+<ul>
+    {% for factura in facturas %}
+        <li>
+            Cliente: {{ factura.cliente }}<br>
+            
+            <ul>
+                Productos:
+                {% for producto in factura.productos %}
+                    <li>{{ producto.producto }} - Cantidad: {{ producto.cantidad }} - Precio: ${{ producto.precio }} </li>
+                {% endfor %}
+            </ul>
+            Total: ${{ factura.total }}
+            <form action="{{ url_for('eliminar_factura', factura_id=factura.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="delete">Eliminar Factura</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

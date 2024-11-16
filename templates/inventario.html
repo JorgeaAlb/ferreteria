@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<h1>Inventario</h1>
+<br>
+<form method="POST" action="{{ url_for('inventario') }}">
+    <label>Nombre del Producto:</label>
+    <input type="text" name="nombre" required>
+    <label>Categoría:</label>
+    <select name="categoria" required>
+        <option value="Herramienta">Herramienta</option>
+        <option value="Construcción">Construcción</option>
+    </select>
+    <label>Precio:</label>
+    <input type="number" name="precio" step="0.01" required>
+    <label>Cantidad:</label>
+    <input type="number" name="cantidad" required>
+    <label>Unidad de Medida:</label>
+    <select name="unidad" required>
+        <option value="unidad">Unidad</option>
+        <option value="kg">Kg</option>
+    </select>
+    <button type="submit">Agregar Producto</button>
+</form>
+<br>
+<h2>Inventario:</h2>
+<ul>
+    {% for producto in inventario %}
+        <li>
+            {{ producto.nombre }} - {{ producto.categoria }} - ${{ producto.precio }} - {{ producto.cantidad }} {{ producto.unidad }}
+            <form action="{{ url_for('editar_producto', producto_id=producto.id) }}" method="get" style="display:inline;">
+                <button type="submit" class="edit">Editar</button>
+            </form>
+            <form action="{{ url_for('borrar_producto', producto_id=producto.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="delete">Borrar</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,258 @@
+/* Reseteo de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #1a1a1a;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: none;
+    display: flex;
+    justify-content: center; /* Centrado en pantallas grandes */
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+    justify-content: center; /* Menú centrado en pantallas grandes */
+    align-items: center;
+    width: 100%;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+
+header nav ul li {
+    margin-right: 30px;
+}
+
+header nav ul li a {
+    color: #fff; /* Texto blanco */
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 17px;
+    display: block;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+    background-color: #333; /* Fondo más oscuro para los botones del menú */
+    border: none;
+}
+
+header nav ul li a:hover {
+    background-color: #555; /* Fondo blanco al pasar el ratón */
+    color: #fff; /* Texto oscuro al pasar el ratón */
+}
+
+/* Menú de hamburguesa */
+header nav .menu-toggle {
+    display: none; /* Por defecto no mostrar el ícono en pantallas grandes */
+    font-size: 1.8em;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+main {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 1em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+ul {
+    list-style: none;
+    margin-top: 1em;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+ul li button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+ul li button:hover {
+    background-color: #e74c3c;
+}
+
+ul li button.edit {
+    background-color: #2980b9;
+}
+
+ul li button.edit:hover {
+    background-color: #3498db;
+}
+
+/* Estilos para el menú de hamburguesa en pantallas pequeñas */
+/* Estilos para el menú de hamburguesa en pantallas pequeñas */
+@media (max-width: 768px) {
+    header nav {
+        justify-content: space-between; /* Mover el ícono de hamburguesa a la derecha */
+    }
+
+    header nav .menu-toggle {
+        display: block;
+        margin-left: auto; /* Esto moverá el ícono a la derecha */
+        margin-right: 20px; /* Espacio desde el borde derecho */
+    }
+
+    header nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #333; /* Fondo más oscuro */
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Ajuste para que no se solape */
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+        border-radius: 8px; /* Bordes redondeados */
+        transition: transform 0.3s ease;
+        transform: translateY(-20px); /* Iniciar fuera de la pantalla */
+    }
+
+    header nav ul li {
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    header nav ul.active {
+        display: flex;
+        transform: translateY(0); /* Desliza hacia abajo */
+    }
+
+    header nav ul li a {
+        font-size: 18px; /* Aumentar tamaño de texto */
+        padding: 15px 25px; /* Aumentar padding */
+        transition: background-color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+        background-color: #555;
+        color: #fff;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Añadir espacio entre los campos del formulario */
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form select, form input[type="number"], form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+form select, form input[type="number"] {
+    margin-bottom: 15px; /* Espacio entre los campos de entrada */
+}
+
+#productos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Añadir espacio entre los productos */
+}
+
+.producto-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el checkbox, el nombre y el campo de cantidad */
+}
+
+.producto-item input[type="number"] {
+    width: 60px; /* Limitar el ancho de la cantidad */
+}
+
+form button {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background-color: #555;
+}
