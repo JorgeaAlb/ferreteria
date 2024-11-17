@@ -5,6 +5,7 @@
 <br>
 <h1>Inventario</h1>
 <br>
+
 <form method="POST" action="{{ url_for('inventario') }}">
     <label>Nombre del Producto:</label>
     <input type="text" name="nombre" required>
@@ -12,6 +13,9 @@
     <select name="categoria" required>
         <option value="Herramienta">Herramienta</option>
         <option value="Construcción">Construcción</option>
+        <option value="Fontaneria">Fontaneria</option>
+        <option value="Electricidad">Electricidad</option>
+        <option value="Jardineria">Jardineria</option>
     </select>
     <label>Precio:</label>
     <input type="number" name="precio" step="0.01" required>
@@ -21,10 +25,16 @@
     <select name="unidad" required>
         <option value="unidad">Unidad</option>
         <option value="kg">Kg</option>
+        <option value="Litros">Litros</option>
+        <option value="Cm">cm</option>
+        <option value="In">in</option>
+        <option value="m³">m³</option>
     </select>
     <button type="submit">Agregar Producto</button>
 </form>
+
 <br>
+
 <h2>Inventario:</h2>
 <ul>
     {% for producto in inventario %}
