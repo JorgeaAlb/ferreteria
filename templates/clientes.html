@@ -8,7 +8,7 @@
 <form method="POST" action="{{ url_for('clientes') }}">
     <label>Nombre del Cliente:</label>
     <input type="text" name="nombre" required>
-    <label>Correo Electrónico:</label>
+    <label>Correo Electrónico: (Opcional)</label>
     <input type="email" name="correo">
     <button type="submit">Agregar Cliente</button>
 </form>
@@ -17,7 +17,7 @@
 <ul>
     {% for cliente in clientes %}
         <li>
-            {{ cliente.nombre }} - {{ cliente.correo }}
+            Nombre: {{ cliente.nombre }} --- Correo: {{ cliente.correo }}
             <form action="{{ url_for('borrar_cliente', cliente_id=cliente.id) }}" method="post" style="display:inline;">
                 <button type="submit" class="delete">Borrar</button>
             </form>

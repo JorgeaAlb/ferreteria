@@ -9,7 +9,7 @@
 <form method="POST" action="{{ url_for('proveedores') }}">
     <label>Nombre del Proveedor:</label>
     <input type="text" name="nombre" required>
-    <label>Correo Electrónico:</label>
+    <label>Correo Electrónico: (Opcional)</label>
     <input type="email" name="correo">
     <button type="submit">Agregar Proveedor</button>
 </form>
@@ -19,7 +19,7 @@
 <ul>
     {% for proveedor in proveedores %}
         <li>
-            {{ proveedor.nombre }} - {{ proveedor.correo }}
+            Nombre: {{ proveedor.nombre }} --- Correo: {{ proveedor.correo }}
             <form action="{{ url_for('borrar_proveedor', proveedor_id=proveedor.id) }}" method="post" style="display:inline;">
                 <button type="submit" class="delete">Borrar</button>
             </form>
