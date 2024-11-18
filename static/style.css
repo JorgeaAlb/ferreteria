@@ -1,10 +1,12 @@
 /* Reseteo de estilos básicos */
+/*Quitar margen y aplicarlo en todos los elementos*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/*Estilo del body*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,26 +15,28 @@ body {
     color: #333;
 }
 
+/*Menu*/
 header {
     background-color: #1a1a1a;
     padding: 10px 0;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
     border-bottom: none;
     display: flex;
-    justify-content: center; /* Centrado en pantallas grandes */
+    justify-content: center; 
     align-items: center;
 }
 
+/*Boton de menu*/
 header nav {
     display: flex;
-    justify-content: center; /* Menú centrado en pantallas grandes */
+    justify-content: center; 
     align-items: center;
     width: 100%;
 }
 
+/*Acomodo del menu*/
 header nav ul {
     list-style: none;
     padding: 0;
@@ -40,31 +44,33 @@ header nav ul {
     margin: 0;
 }
 
-
+/*Espacio entre el menu*/
 header nav ul li {
     margin-right: 30px;
 }
 
+/*Estilo del menu*/
 header nav ul li a {
-    color: #fff; /* Texto blanco */
+    color: #fff;
     text-decoration: none;
     font-size: 16px;
     padding: 10px 17px;
     display: block;
     border-radius: 5px;
     transition: background 0.3s, color 0.3s;
-    background-color: #333; /* Fondo más oscuro para los botones del menú */
+    background-color: #333; 
     border: none;
 }
 
+/*Cuando se pase el mouse por el boton */
 header nav ul li a:hover {
-    background-color: #555; /* Fondo blanco al pasar el ratón */
-    color: #fff; /* Texto oscuro al pasar el ratón */
+    background-color: #555; 
 }
+
 
 /* Menú de hamburguesa */
 header nav .menu-toggle {
-    display: none; /* Por defecto no mostrar el ícono en pantallas grandes */
+    display: none;
     font-size: 1.8em;
     color: #fff;
     background: none;
@@ -73,6 +79,7 @@ header nav .menu-toggle {
     transition: transform 0.3s ease;
 }
 
+/* Acomoo del contenido */
 main {
     max-width: 800px;
     margin: 2em auto;
@@ -82,21 +89,26 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo a los h2 */
 h2 {
     color: #333;
     margin-bottom: 1em;
 }
 
+/* ---------------------------- Formulario ---------------------------- */
+/* Acomodo de los formularios */
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Estilo de los textos en los formularios */
 form label {
     font-weight: bold;
 }
 
+/* Estilo de los formularios */
 form input[type="text"],
 form input[type="email"],
 form input[type="number"],
@@ -106,6 +118,7 @@ form select {
     border-radius: 4px;
 }
 
+/* Estilo de los botones */
 form button {
     padding: 10px;
     background-color: #333;
@@ -116,6 +129,7 @@ form button {
     transition: background 0.3s;
 }
 
+/* Estilo de los botones al pasar el mouse */
 form button:hover {
     background-color: #555;
 }
@@ -129,9 +143,8 @@ ul li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 5px;
+    border-radius: 2px;
+    margin-bottom: 3px;
 }
 
 ul li button {
@@ -157,7 +170,6 @@ ul li button.edit:hover {
     background-color: #3498db;
 }
 
-/* Estilos para el menú de hamburguesa en pantallas pequeñas */
 /* Estilos para el menú de hamburguesa en pantallas pequeñas */
 @media (max-width: 768px) {
     header nav {
