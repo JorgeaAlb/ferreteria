@@ -94,6 +94,10 @@ def proveedores():
         }
         data['proveedores'].append(nuevo_proveedor)
         guardar_datos(data)
+
+        if request.form.get('agregar_inventario') == 'si':
+            return redirect(url_for('inventario'))
+
     return render_template('proveedores.html', proveedores=data['proveedores'])
 
 @app.route('/proveedores/borrar/<int:proveedor_id>', methods=['POST'])
