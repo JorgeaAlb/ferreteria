@@ -11,14 +11,12 @@ Este sistema de gestión de ferretería está diseñado para facilitar la admini
 - **Proveedores**: Control de proveedores asociados.
 - **Facturación**: Creación de facturas para los productos seleccionados.
 
-<h3 style="color:#2a9d8f;">Requisitos 📋</h3>
-
+## Requisitos 🛠️
 Para ejecutar este sistema, necesitas:
 - **Python** 3.8 o superior
 - **Flask**
 
-<h3 style="color:#e76f51;">Instalación 🔧</h3> 
-
+## Instalación:
 1. Clona este repositorio:
    ```bash
    git clone https://github.com/JorgeaAlb/ferreteria.git
@@ -30,8 +28,7 @@ Para ejecutar este sistema, necesitas:
     ```
 
 
-<h3 style="color:#f4a261;">Uso 🚀</h3>
-
+## Uso:
 1. Inicia el servidor:
     ```
     python3 main.py
