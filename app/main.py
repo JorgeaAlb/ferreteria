@@ -1,9 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
+import os
 
-app = Flask(__name__)
-DATA_FILE = 'base_datos.json'
+# Ruta base del proyecto
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+BACKEND_DIR = os.path.join(BASE_DIR, 'backend')
 
+app = Flask(
+    __name__,
+    static_folder=os.path.realpath('frontend/static'),
+    # template_folder=os.path.join(FRONTEND_DIR, 'templates')
+    template_folder=os.path.realpath('frontend/templates')
+)
+
+# Archivo de datos
+DATA_FILE = os.path.realpath('backend/base_datos.json')
+
+# Funciones para cargar y guardar datos
 def cargar_datos():
     try:
         with open(DATA_FILE, 'r') as file:
@@ -15,13 +29,12 @@ def guardar_datos(data):
     with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
-# Ruta de inicio
+# Rutas de la aplicación
 @app.route('/')
 def inicio():
     return render_template('index.html')
 
 # ---------------------------- INVENTARIO ---------------------------- #
-
 @app.route('/inventario', methods=['GET', 'POST'])
 def inventario():
     data = cargar_datos()
@@ -60,7 +73,6 @@ def editar_producto(producto_id):
     return render_template('editar_producto.html', producto=producto)
 
 # ---------------------------- CLIENTES ---------------------------- #
-
 @app.route('/clientes', methods=['GET', 'POST'])
 def clientes():
     data = cargar_datos()
@@ -82,7 +94,6 @@ def borrar_cliente(cliente_id):
     return redirect(url_for('clientes'))
 
 # ---------------------------- PROVEEDORES ---------------------------- #
-
 @app.route('/proveedores', methods=['GET', 'POST'])
 def proveedores():
     data = cargar_datos()
@@ -103,62 +114,12 @@ def borrar_proveedor(proveedor_id):
     guardar_datos(data)
     return redirect(url_for('proveedores'))
 
-
 # ---------------------------- FACTURACIÓN ---------------------------- #
-
 @app.route("/facturacion", methods=["GET", "POST"])
 def facturacion():
     data = cargar_datos()
-    if request.method == "POST":
-        cliente_id = request.form["cliente"]
-        productos_ids = request.form.getlist("productos")  # Obtener todos los productos seleccionados
-        cantidad_dict = {}  # Un diccionario para almacenar las cantidades de cada producto seleccionado
-
-        # Buscar el cliente
-        cliente = next(cliente for cliente in data['clientes'] if cliente["id"] == int(cliente_id))
-
-        # Buscar los productos seleccionados y sus cantidades
-        productos_seleccionados = []
-        total = 0
-        for producto_id in productos_ids:
-            cantidad = int(request.form.get(f"cantidad_{producto_id}", 1))  # Obtener la cantidad seleccionada
-            producto = next(p for p in data['inventario'] if p["id"] == int(producto_id))
-
-            # Verificar que la cantidad no exceda el inventario
-            if cantidad <= producto["cantidad"]:
-                productos_seleccionados.append({
-                    "producto": producto["nombre"],
-                    "cantidad": cantidad,
-                    "precio": producto["precio"]
-                })
-                total += float(producto["precio"]) * cantidad
-                # Restar la cantidad vendida del inventario
-                producto["cantidad"] -= cantidad
-            else:
-                # Si la cantidad es mayor que el inventario, agregar un mensaje de error
-                return render_template("facturacion.html", clientes=data['clientes'], inventario=data['inventario'], facturas=data['facturas'], error="No hay suficiente inventario para uno de los productos seleccionados.")
-
-        # Crear la factura
-        factura = {
-            "id": len(data['facturas']) + 1,  # Asigna un ID único a la factura
-            "cliente": cliente["nombre"],
-            "productos": productos_seleccionados,
-            "total": total
-        }
-        data['facturas'].append(factura)
-        guardar_datos(data)
-
     return render_template("facturacion.html", clientes=data['clientes'], inventario=data['inventario'], facturas=data['facturas'])
 
-# Ruta para eliminar factura
-@app.route('/facturacion/eliminar/<int:factura_id>', methods=['POST'])
-def eliminar_factura(factura_id):
-    data = cargar_datos()
-    data['facturas'] = [factura for factura in data['facturas'] if factura['id'] != factura_id]
-    guardar_datos(data)
-    return redirect(url_for('facturacion'))
-
-
-# Correr en la ip 
+# Correr en la IP 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
