@@ -1,6 +1,6 @@
 # Sistema de Gestión de Ferretería
 
-![Sistema de Gestión de Ferretería](/static/inicio.png) <!-- Inserta una imagen representativa si deseas -->
+![Sistema de Gestión de Ferretería](/app/frontend/static/inicio.png) <!-- Inserta una imagen representativa si deseas -->
 
 ## Descripción
 Este sistema de gestión de ferretería está diseñado para facilitar la administración de inventario, clientes, proveedores y facturación. Desarrollado en **Python** utilizando **Flask** como framework, permite realizar operaciones de edición, eliminación y facturación de productos y servicios.
