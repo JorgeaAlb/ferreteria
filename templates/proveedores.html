@@ -6,69 +6,13 @@
 <h1>Proveedores</h1>
 <br>
 
-<form method="POST" action="{{ url_for('proveedores') }}" id="form_proveedor">
+<form method="POST" action="{{ url_for('proveedores') }}">
     <label>Nombre del Proveedor:</label>
     <input type="text" name="nombre" required>
-
     <label>Correo Electrónico: (Opcional)</label>
     <input type="email" name="correo">
-
-    <label>¿Quieres añadir productos al inventario?</label>
-    <select name="agregar_inventario" id="agregar_inventario" required onchange="mostrarFormularioInventario()">
-        <option value="no">No</option>
-        <option value="si">Sí</option>
-    </select>
-
-    <button type="submit" id="btn_agregar_proveedor">Agregar Proveedor</button>
+    <button type="submit">Agregar Proveedor</button>
 </form>
-
-<div id="formulario_inventario" style="display: none;">
-    <h2>Añadir Producto al Inventario</h2>
-    <form method="POST" action="{{ url_for('inventario') }}">
-        <label>Nombre del Producto:</label>
-        <input type="text" name="nombre" required>
-
-        <label>Categoría:</label>
-        <select name="categoria" required>
-            <option value="Herramienta">Herramienta</option>
-            <option value="Construccion">Construcción</option>
-            <option value="Fontaneria">Fontanería</option>
-            <option value="Jardineria">Jardinería</option>
-        </select>
-
-        <label>Precio:</label>
-        <input type="number" name="precio" step="0.1" required>
-
-        <label>Cantidad:</label>
-        <input type="number" name="cantidad" required>
-
-        <label>Unidad de medida:</label>
-        <select name="unidad" required>
-            <option value="unidad">Unidad</option>
-            <option value="kg">Kg</option>
-            <option value="Litros">Litros</option>
-            <option value="Cm">cm</option>
-            <option value="In">in</option>
-            <option value="m³">m³</option>
-        </select>
-
-        <button type="submit">Agregar Producto</button>
-    </form>
-</div>
-
-<script>
-    function mostrarFormularioInventario() {
-        var seleccion = document.getElementById('agregar_inventario').value;
-        if (seleccion === 'si') {
-            document.getElementById('formulario_inventario').style.display = 'block';
-            document.getElementById('btn_agregar_proveedor').style.display = 'none'; // Oculta el botón "Agregar Proveedor"
-        } else {
-            document.getElementById('formulario_inventario').style.display = 'none';
-            document.getElementById('btn_agregar_proveedor').style.display = 'inline'; // Muestra el botón "Agregar Proveedor"
-        }
-    }
-</script>
-
 <br>
 <h2>Proveedores:</h2>
 
