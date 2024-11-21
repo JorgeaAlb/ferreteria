@@ -6,14 +6,53 @@
 <h1>Proveedores</h1>
 <br>
 
-<form method="POST" action="{{ url_for('proveedores') }}">
+<form id="form-proveedor" method="POST" action="{{ url_for('proveedores') }}">
     <label>Nombre del Proveedor:</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" required style="display: block; margin-bottom: 10px;">
+    
     <label>Correo Electrónico: (Opcional)</label>
-    <input type="email" name="correo">
-    <button type="submit">Agregar Proveedor</button>
+    <input type="email" name="correo" style="display: block; margin-bottom: 10px;">
+    
+    <label>¿Quieres añadir productos del proveedor?</label>
+    <select id="agregar-productos" name="agregar_productos" required style="display: block; margin-bottom: 10px;">
+        <option value="no">No</option>
+        <option value="si">Sí</option>
+    </select>
+    
+    <div id="form-productos" style="display: none;">
+        <h2>Agregar Productos</h2>
+        <label>Nombre del Producto:</label>
+        <input type="text" name="producto_nombre" style="display: block; margin-bottom: 10px;">
+        
+        <label>Categoría:</label>
+        <select name="categoria" style="display: block; margin-bottom: 10px;">
+            <option value="Material">Material</option>
+            <option value="Construcción">Construcción</option>
+            <option value="Fontaneria">Fontaneria</option>
+            <option value="Electricidad">Electricidad</option>
+            <option value="Jardineria">Jardineria</option>
+        </select>
+
+        <label>Precio:</label>
+        <input type="number" name="precio" step="0.01" style="display: block; margin-bottom: 10px;">
+        
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" style="display: block; margin-bottom: 10px;">
+        
+        <label>Unidad de Medida:</label>
+        <select name="unidad" style="display: block; margin-bottom: 10px;">
+            <option value="unidad">Unidad</option>
+            <option value="kg">Kg</option>
+            <option value="Litros">Litros</option>
+            <option value="Cm">cm</option>
+            <option value="In">in</option>
+            <option value="m³">m³</option>
+        </select>
+    </div>
+
+    <button type="submit" id="submit-btn">Agregar Proveedor</button>
 </form>
-<br>
+
 <h2>Proveedores:</h2>
 
 <ul>
@@ -26,4 +65,20 @@
         </li>
     {% endfor %}
 </ul>
+
+<script>
+    // Mostrar u ocultar el formulario de productos según la selección
+    document.getElementById('agregar-productos').addEventListener('change', function() {
+        var formProductos = document.getElementById('form-productos');
+        var submitBtn = document.getElementById('submit-btn');
+        
+        if (this.value === 'si') {
+            formProductos.style.display = 'block';  // Mostrar formulario de productos
+            submitBtn.innerHTML = 'Agregar Proveedor y Producto';  // Cambiar texto del botón
+        } else {
+            formProductos.style.display = 'none';  // Ocultar formulario de productos
+            submitBtn.innerHTML = 'Agregar Proveedor';  // Restablecer texto del botón
+        }
+    });
+</script>
 {% endblock %}

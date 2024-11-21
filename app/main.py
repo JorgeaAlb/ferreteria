@@ -98,6 +98,7 @@ def borrar_cliente(cliente_id):
 def proveedores():
     data = cargar_datos()
     if request.method == 'POST':
+        # Guardar proveedor
         nuevo_proveedor = {
             "id": len(data['proveedores']) + 1,
             "nombre": request.form['nombre'],
@@ -105,14 +106,34 @@ def proveedores():
         }
         data['proveedores'].append(nuevo_proveedor)
         guardar_datos(data)
+
+        # Si el formulario incluye datos de productos, se procesan
+        if request.form.get('agregar_productos') == 'si':  # Solo si 'agregar_productos' es 'si'
+            if 'producto_nombre' in request.form:
+                nuevo_producto = {
+                    "id": len(data['inventario']) + 1,
+                    "nombre": request.form['producto_nombre'],
+                    "categoria": request.form['categoria'],
+                    "precio": float(request.form['precio']),
+                    "cantidad": int(request.form['cantidad']),
+                    "unidad": request.form['unidad'],
+                    "proveedor_id": nuevo_proveedor["id"]  # Asociamos el producto con el proveedor
+                }
+                data['inventario'].append(nuevo_producto)
+                guardar_datos(data)
+
+        return redirect(url_for('proveedores'))
+
     return render_template('proveedores.html', proveedores=data['proveedores'])
 
 @app.route('/proveedores/borrar/<int:proveedor_id>', methods=['POST'])
 def borrar_proveedor(proveedor_id):
     data = cargar_datos()
+    # Eliminar el proveedor con el id dado
     data['proveedores'] = [prov for prov in data['proveedores'] if prov['id'] != proveedor_id]
     guardar_datos(data)
     return redirect(url_for('proveedores'))
+
 
 # ---------------------------- FACTURACIÓN ---------------------------- #
 @app.route("/facturacion", methods=["GET", "POST"])
