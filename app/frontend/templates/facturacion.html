@@ -7,7 +7,7 @@
 <br>
 <form method="POST" action="{{ url_for('facturacion') }}">
     <label>Cliente:</label>
-    <select name="cliente" required>
+    <select name="cliente_id" required>
         {% for cliente in clientes %}
             <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
         {% endfor %}
@@ -28,6 +28,7 @@
 </form>
 
 
+
 <br>
 <h2>Facturas Generadas:</h2>
 <ul>
@@ -42,9 +43,10 @@
                 {% endfor %}
             </ul>
             Total: ${{ factura.total }}
-            <form action="{{ url_for('eliminar_factura', factura_id=factura.id) }}" method="post" style="display:inline;">
+            <form action="{{ url_for('eliminar_factura', factura_id=factura.id) }}" method="POST" style="display:inline;">
                 <button type="submit" class="delete">Eliminar Factura</button>
             </form>
+            
         </li>
     {% endfor %}
 </ul>
