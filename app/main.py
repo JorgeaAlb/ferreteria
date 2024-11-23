@@ -34,7 +34,7 @@ class Producto:
     def to_dict(self):
         return vars(self)
     
-# Clase del clienteclass Cliente:
+class Cliente:
     def __init__(self, id, nombre, correo):
         self.id = id
         self.nombre = nombre
