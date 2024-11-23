@@ -147,28 +147,40 @@ ul li {
     margin-bottom: 3px;
 }
 
+ul li span {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+    margin-right: 10px; /* Espacio con respecto a los botones */
+}
+
+/* Estilo para los botones en el inventario */
 ul li button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    background-color: #c0392b;
-    color: #fff;
+    margin: 0 5px;
+    padding: 8px 12px;
+    font-size: 14px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-ul li button:hover {
-    background-color: #e74c3c;
-}
-
+/* Botones de editar y borrar */
 ul li button.edit {
     background-color: #2980b9;
+    color: white;
 }
 
 ul li button.edit:hover {
     background-color: #3498db;
 }
+
+ul li button.delete {
+    background-color: #c0392b;
+    color: white;
+}
+
+ul li button.delete:hover {
+    background-color: #e74c3c;
+}
+
 
 /* Estilos para el menú de hamburguesa en pantallas pequeñas */
 @media (max-width: 768px) {

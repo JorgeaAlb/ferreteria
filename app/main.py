@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
+from datetime import datetime
 
 # ---------------------------- CLASES ---------------------------- #
 # Clase de la base de datos 
@@ -253,7 +254,8 @@ def facturacion():
             "id": len(data["facturas"]) + 1,
             "cliente": cliente["nombre"],
             "productos": productos,
-            "total": total
+            "total": total,
+            "fecha_hora": datetime.now().strftime("%I:%M %p, %d-%m-%Y")
         }
         #Se añade la nueva lista a la base de datos
         data["facturas"].append(nueva_factura)

@@ -38,15 +38,18 @@
 <h2>Inventario:</h2>
 <ul>
     {% for producto in inventario %}
-        <li>
+    <li>
+        <span>
             {{ producto.nombre }} - {{ producto.categoria }} - ${{ producto.precio }} - {{ producto.cantidad }} {{ producto.unidad }}
-            <form action="{{ url_for('editar_producto', producto_id=producto.id) }}" method="get" style="display:inline;">
-                <button type="submit" class="edit">Editar</button>
-            </form>
-            <form action="{{ url_for('borrar_producto', producto_id=producto.id) }}" method="post" style="display:inline;">
-                <button type="submit" class="delete">Borrar</button>
-            </form>
-        </li>
+        </span>
+        <form action="{{ url_for('editar_producto', producto_id=producto.id) }}" method="get" style="display:inline;">
+            <button type="submit" class="edit">Editar</button>
+        </form>
+        <form action="{{ url_for('borrar_producto', producto_id=producto.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="delete">Borrar</button>
+        </form>
+    </li>
     {% endfor %}
 </ul>
+
 {% endblock %}

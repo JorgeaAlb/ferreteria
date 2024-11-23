@@ -13,8 +13,8 @@
         {% endfor %}
     </select>
 
-    <label>Productos:</label>
     <div id="productos-container">
+        <label>Productos:</label>
         {% for producto in inventario %}
             <div class="producto-item">
                 <input type="checkbox" name="productos" value="{{ producto.id }}" class="producto" />
@@ -27,28 +27,130 @@
     <button type="submit">Generar Factura</button>
 </form>
 
-
-
 <br>
+
 <h2>Facturas Generadas:</h2>
 <ul>
     {% for factura in facturas %}
-        <li>
-            Cliente: {{ factura.cliente }}<br>
-            
-            <ul>
-                Productos:
-                {% for producto in factura.productos %}
-                    <li>{{ producto.producto }} - Cantidad: {{ producto.cantidad }} - Precio: ${{ producto.precio }} </li>
-                {% endfor %}
-            </ul>
-            Total: ${{ factura.total }}
+        <li class="factura-container">
+            <div>
+                <strong>Cliente:</strong> {{ factura.cliente }}<br>
+                <ul>
+                    <strong>Productos:</strong>
+                    {% for producto in factura.productos %}
+                        <li>{{ producto.producto }} - Cantidad: {{ producto.cantidad }} - Precio: ${{ producto.precio }}</li>
+                    {% endfor %}
+                </ul>
+
+                <ul>
+                    <strong>Total:</strong> ${{ factura.total }}<br>
+                </ul>
+
+                <ul>
+                    <strong>Factura creada:</strong> {{ factura.fecha_hora }}
+                </ul>
+            </div>
+
             <form action="{{ url_for('eliminar_factura', factura_id=factura.id) }}" method="POST" style="display:inline;">
-                <button type="submit" class="delete">Eliminar Factura</button>
+                <button type="submit" class="delete factura-boton">Eliminar Factura</button>
             </form>
-            
+
         </li>
     {% endfor %}
 </ul>
+
+<style>
+    /* Diseño estándar (pantallas grandes) */
+.factura-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Para pantallas pequeñas (celulares) */
+@media (max-width: 768px) {
+    .factura-container {
+        flex-direction: column; /* Cambia la dirección a columnas */
+        align-items: flex-start; /* Alinea los elementos al inicio */
+    }
+
+    .factura-boton {
+        width: 100%; /* El botón ocupará todo el ancho */
+        margin-top: 10px; /* Espaciado con respecto al contenido superior */
+    }
+}
+
+    .facturas {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.factura {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.factura-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.factura-productos ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.factura-productos ul li {
+    margin: 5px 0;
+}
+
+.delete {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete:hover {
+    background-color: #c0392b;
+}
+
+.factura-header span {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .factura-header {
+        flex-wrap: nowrap;
+    }
+
+    .factura-header span {
+        flex: 1;
+        text-align: left;
+        margin: 0 10px;
+    }
+}
+
+</style>
+
 
 {% endblock %}
